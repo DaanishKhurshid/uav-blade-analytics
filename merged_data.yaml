@@ -1,0 +1,14 @@
+# merged_data.yaml
+path: /content/dataset
+train: train/images
+val: val/images
+
+names:
+  0: corrosion
+  1: crack
+  2: craze
+  3: hide_craze
+  4: surface_injure
+  5: thunderstrike
+  6: dirt
+  7: other_damage

@@ -1,0 +1,27 @@
+# --- PROTECTIVE CODE REPO SHIELD ---
+
+# Ignore raw and processed dataset images and annotations
+WTBD_YOLO_Baseline/
+Blade30_Yolo_processed/
+WT blade defect dataset/
+3_blade_1_15_with_labeldata/
+3_blade_16_30_with_labeldata/
+dataset/
+
+# Ignore massive compressed archive files
+*.zip
+*.tar.gz
+*.tgz
+
+# Ignore deep learning binary model weight checkpoints
+*.pt
+*.onnx
+*.engine
+
+# Ignore local system clutter and environment configurations
+.DS_Store
+.venv/
+venv/
+.env
+__pycache__/
+*.pyc
