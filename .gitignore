@@ -1,4 +1,4 @@
-# --- PROTECTIVE CODE REPO SHIELD ---
+# --- PROTECTIVE CODE REREPO SHIELD ---
 
 # Ignore raw and processed dataset images and annotations
 WTBD_YOLO_Baseline/
@@ -18,6 +18,9 @@ dataset/
 *.onnx
 *.engine
 
+# EXPLICIT OVERRIDE: Force Git to track our final model weights file
+!backend/final_production_model_50_epochs.pt
+
 # Ignore local system clutter and environment configurations
 .DS_Store
 .venv/
@@ -25,3 +28,11 @@ venv/
 .env
 __pycache__/
 *.pyc
+
+# Block private credential keys
+*wandb*
+
+# Block loose guidelines and local notebook sandboxes
+*.pdf
+*.docx
+*.ipynb
