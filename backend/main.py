@@ -12,7 +12,7 @@ app = FastAPI(
 )
 
 # Direct path to your weights inside your clean local folder layout
-MODEL_PATH = "backend/final_production_model_50_epochs.pt"
+MODEL_PATH = "final_production_model_50_epochs.pt"
 
 
 
