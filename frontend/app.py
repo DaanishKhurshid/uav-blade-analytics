@@ -17,7 +17,8 @@ st.title("🛸 Autonomous Wind Turbine Blade Inspection System")
 st.write("Production-Grade Interface Running via Active Workspace Nodes.")
 
 # 1. Configuration variables (EXACT ROBUST LIVE CLOUD CHANNELS)
-FASTAPI_URL = "https://uav-backend-ffs9.onrender.com/predict"
+FASTAPI_URL = "https://onrender.com"
+
 MODEL_PATH = "final_production_model_50_epochs.pt"  
 CLASS_NAMES = {
     0: "corrosion", 1: "crack", 2: "craze", 3: "hide_craze",
