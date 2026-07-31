@@ -5,7 +5,6 @@ from PIL import Image
 import io
 import os
 import requests
-from ultralytics import YOLO
 
 st.set_page_config(
     page_title="UAV Drone Blade Analytics",
@@ -16,23 +15,13 @@ st.set_page_config(
 st.title("🛸 Autonomous Wind Turbine Blade Inspection System")
 st.write("Production-Grade Interface Running via Active Workspace Nodes.")
 
-# 1. Configuration variables (EXACT ROBUST LIVE CLOUD CHANNELS)
+# 1. Configuration variables (ALIGNED FOR CLOUD INFRASTRUCTURE)
 FASTAPI_URL = "https://onrender.com"
-
 MODEL_PATH = "final_production_model_50_epochs.pt"  
 CLASS_NAMES = {
     0: "corrosion", 1: "crack", 2: "craze", 3: "hide_craze",
     4: "surface_injure", 5: "thunderstrike", 6: "dirt", 7: "other_damage"
 }
-
-# 2. Safety Local Cache (Used if FastAPI node is asleep)
-@st.cache_resource
-def load_fallback_model():
-    if os.path.exists(MODEL_PATH):
-        return YOLO(MODEL_PATH)
-    return None
-
-model_fallback = load_fallback_model()
 
 # Drag-and-drop file upload block
 uploaded_file = st.file_uploader("Choose a blade image...", type=["jpg", "jpeg", "png"])
@@ -52,7 +41,7 @@ if uploaded_file is not None:
         # --- PATH A: TRY FASTAPI BACKEND STREAM FIRST ---
         try:
             files = {"file": (uploaded_file.name, raw_bytes, uploaded_file.type)}
-            response = requests.post(FASTAPI_URL, files=files, timeout=30)
+            response = requests.post(FASTAPI_URL, files=files, timeout=15)
             
             if response.status_code == 200:
                 st.info("⚡ Connection Secured: Processing via FastAPI Containerized Pipeline.")
@@ -107,11 +96,14 @@ if uploaded_file is not None:
                     """)
                 st.stop()
         except Exception:
-            pass # If FastAPI connection drops, gracefully move to native backup below
+            pass # If cloud connection drops, move smoothly down to fallback run below
 
-        # --- PATH B: FALLBACK NATIVE RUN (GUARANTEED BACKUP) ---
-        if model_fallback is not None:
+        # --- PATH B: FALLBACK NATIVE RUN (LAZY INITIALIZED FOR CONTAINER SAFETY) ---
+        if os.path.exists(MODEL_PATH):
             st.success("💻 Active Failover: Running model natively within isolated interface memory block.")
+            from ultralytics import YOLO
+            model_fallback = YOLO(MODEL_PATH)
+            
             results = model_fallback.predict(source=image, imgsz=1024, conf=0.25, verbose=False)
             result = results[0]  
             detections_count = 0
@@ -163,3 +155,5 @@ if uploaded_file is not None:
                 - **Field Crew Task**: Apply an aerodynamic composite patch over the affected region.
                 - **Monitoring**: Schedule localized UAV observation re-entry flights in 14 days.
                 """)
+        else:
+            st.error("Infrastructure Sync Error: Live cloud cluster is offline, and standalone weights file cannot be accessed.")
