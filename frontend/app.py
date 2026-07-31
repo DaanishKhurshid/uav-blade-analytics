@@ -123,6 +123,7 @@ if uploaded_file is not None:
             
             if detections_count == 0:
                 st.success("✅ Analysis Complete: No structural defects localized. Blade is flight-safe.")
+                st.image(img_array, use_container_width=True)  # FIXED: Render the analyzed image context here
                 st.write("---")
                 st.subheader("🤖 Autonomous Maintenance Agent Report")
                 st.markdown("""
