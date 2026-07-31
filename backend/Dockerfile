@@ -2,8 +2,9 @@ FROM python:3.10
 ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /app
 
-# 1. RUNTIME DEPENDENCIES: Force headless OpenCV to bypass Linux libGL hardware errors
-RUN pip install --no-cache-dir opencv-python-headless fastapi uvicorn ultralytics Pillow python-multipart
+# 1. RUNTIME DEPENDENCIES: Install ultralytics first, then explicitly overwrite with headless OpenCV
+RUN pip install --no-cache-dir fastapi uvicorn ultralytics Pillow python-multipart && \
+    pip install --no-cache-dir --force-reinstall opencv-python-headless
 
 # Copy only the backend code and weights
 COPY main.py .
