@@ -2,8 +2,8 @@ FROM python:3.10
 ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /app
 
-# Install package dependencies required by the backend
-RUN pip install --no-cache-dir fastapi uvicorn ultralytics Pillow python-multipart
+# 1. RUNTIME DEPENDENCIES: Force headless OpenCV to bypass Linux libGL hardware errors
+RUN pip install --no-cache-dir opencv-python-headless fastapi uvicorn ultralytics Pillow python-multipart
 
 # Copy only the backend code and weights
 COPY main.py .
