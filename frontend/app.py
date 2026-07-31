@@ -16,9 +16,9 @@ st.set_page_config(
 st.title("🛸 Autonomous Wind Turbine Blade Inspection System")
 st.write("Production-Grade Interface Running via Active Workspace Nodes.")
 
-# 1. Configuration variables
-FASTAPI_URL = "http://localhost:8000/predict"
-MODEL_PATH = "backend/final_production_model_50_epochs.pt"  # Fixed path alignment
+# 1. Configuration variables (EXACT ROBUST LIVE CLOUD CHANNELS)
+FASTAPI_URL = "https://uav-backend-ffs9.onrender.com/"
+MODEL_PATH = "final_production_model_50_epochs.pt"  
 CLASS_NAMES = {
     0: "corrosion", 1: "crack", 2: "craze", 3: "hide_craze",
     4: "surface_injure", 5: "thunderstrike", 6: "dirt", 7: "other_damage"
@@ -112,14 +112,14 @@ if uploaded_file is not None:
         if model_fallback is not None:
             st.success("💻 Active Failover: Running model natively within isolated interface memory block.")
             results = model_fallback.predict(source=image, imgsz=1024, conf=0.25, verbose=False)
-            result = results[0]
+            result = results[0]  
             detections_count = 0
             img_array = np.array(image)
             
             if result.boxes:
                 detections_count = len(result.boxes)
                 for i, box in enumerate(result.boxes):
-                    xyxy = box.xyxy.tolist()[0]
+                    xyxy = box.xyxy.tolist()[0]  
                     conf = float(box.conf)
                     cls_id = int(box.cls)
                     name = CLASS_NAMES.get(cls_id, "defect")
@@ -162,5 +162,3 @@ if uploaded_file is not None:
                 - **Field Crew Task**: Apply an aerodynamic composite patch over the affected region.
                 - **Monitoring**: Schedule localized UAV observation re-entry flights in 14 days.
                 """)
-        else:
-            st.error("Critical Error: Unable to communicate with backend nodes.")
