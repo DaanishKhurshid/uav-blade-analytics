@@ -20,6 +20,7 @@ dataset/
 
 # EXPLICIT OVERRIDE: Force Git to track our final model weights file
 !backend/final_production_model_50_epochs.pt
+!frontend/final_production_model_50_epochs.pt
 
 # Ignore local system clutter and environment configurations
 .DS_Store
