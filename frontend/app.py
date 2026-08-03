@@ -18,7 +18,8 @@ st.write("Production-Grade Interface Running via Active Workspace Nodes.")
 
 # 1. Configuration variables
 FASTAPI_URL = "https://uav-backend-ffs9.onrender.com/predict"
-MODEL_PATH = "final_production_model_50_epochs.pt"  
+MODEL_PATH = "frontend/final_production_model_50_epochs.pt"
+
 CLASS_NAMES = {
     0: "corrosion", 1: "crack", 2: "craze", 3: "hide_craze",
     4: "surface_injure", 5: "thunderstrike", 6: "dirt", 7: "other_damage"
