@@ -2,6 +2,7 @@ import io
 import os
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 from ultralytics import YOLO
 
@@ -11,10 +12,17 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Direct path to your weights inside your clean local folder layout
+# 🌐 FIXED CORS MIDDLEWARE LAYER: Unblocks Streamlit Cloud connection streams completely
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permits requests from any web domain layout globally
+    allow_credentials=True,
+    allow_methods=["*"],  # Permits all standard request methods (POST, GET, etc.)
+    allow_headers=["*"],  # Permits all header authorization packets
+)
+
+# Direct path to your weights inside your clean folder layout
 MODEL_PATH = "final_production_model_50_epochs.pt"
-
-
 
 # Load the model directly into local system runtime memory
 if os.path.exists(MODEL_PATH):
