@@ -1,0 +1,11 @@
+# training/dataset.yaml
+path: /content/dataset # Colab environment tracking path
+train: train/images
+val: val/images
+
+# Target Defect Classes
+nc: 3
+names:
+  0: crack
+  1: erosion
+  2: structural_damage
